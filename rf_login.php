@@ -3,7 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
 <title>Welcome mo to</title>
-<!--Welcome din-->
+
+<!--aksjdaskdjaslkd -->
+
+<!--asdasdasd -->
+
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
