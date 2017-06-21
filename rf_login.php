@@ -38,7 +38,7 @@ body {
 	margin-top: 65px;
 }
 
-#userName, #passWord {
+#username, #password {
 	width: 90%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -72,7 +72,7 @@ body {
 	background-color: #efefef;
 }
 
-#submit {
+#login {
 	margin-right: 55px;
 	padding: 10px 22px;
 }
@@ -89,16 +89,7 @@ a:hover {
 
 <body>
 
-	<!--  <nav class="backgroundColorNavBar navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#"></a>
-			</div>
-		</div>
-	</nav>
-	-->
-
-	<form action="" method="POST">
+	<form action="CreateUser.php" method="POST">
 
 		<div class="backgroundColorTransparent marginTop container well">
 			<div class="row">
@@ -112,26 +103,27 @@ a:hover {
 					<div class="jumbotron" id="jumboHeader">Log Me in!</div>
 
 					<p>
-						<input type="text" required name="user" id="userName"
+						<input type="text" required name=username id="username"
 							placeholder="Enter your username" />
 					</p>
 					<p>
-						<input type="password" required name="pass" id="passWord"
+						<input type="password" required name="password" id="password"
 							placeholder="Enter your password" />
 					</p>
 
 					<a href="rf_register.php"><u><center>Not yet a member? Register!</center></u></a>
 					<br />
 					<p align="right">
-						<button class="btn btn-primary" name="submit" id="submit">Log-In</button>
+						<button class="btn btn-primary" name="login" id="login">Log-In</button>
 					</p>
-					<!-- <p><button name = "close" id = "close" onclick="self.close()">Cancel</button> -->
 				</div>
 			</div>
 
 		</div>
 
 	</form>
+
+
 
 
 </body>

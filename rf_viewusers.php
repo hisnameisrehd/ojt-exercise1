@@ -119,42 +119,99 @@ th, td {
 	padding: 8px;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
 	background-color: #efefef;
 	color: black;
-	
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
 	color: white;
 }
 
+.buttonDiv {
+	text-align: center;
+}
+
+#logout {
+	margin-top: -50px;
+	margin-right: 100px;
+	float: right;
+}
 </style>
 
 
 <body>
 
 
-
-	<div class="backgroundColorTransparent marginTop container well">
-		<table>
-			<tr>
-				<th>Username</th>
-				<th>Password</th>
-				<th>Email</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Birthdate</th>
-				<th>Gender</th>
-			</tr>
-		</table>
-	</div>
+	<form action="CreateUser.php" method="POST">
 	
-    
-    
-    <?php
+	<button name = "logout" id = "logout" class = "btn btn-danger">Logout</button>
+
+
+		<div class="backgroundColorTransparent marginTop container well">
+			<table>
+				<tr>
+					<th></th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Email</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Birthdate</th>
+					<th>Gender</th>
+				</tr>
+				
+				<?php
+				$username = "root";
+				$password = "";
+				$servername = "localhost";
+				
+				$conn = new PDO ("mysql:host=$servername;dbname=ojtexercise", $username, $password );
+				// set the PDO error mode to exception
+				$conn->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+				$stmt = $conn->prepare ( "SELECT * FROM ojtexercise.user" );
+				$stmt->execute ();
+				
+				if ($stmt != null) {
+					
+					foreach ( $stmt as $row ) {
+						?>
+						<tr>
+					<td><input type='checkbox' name='checkbox[]' id='checkbox'
+						value="<?php echo $row['id']?>"></td>
+						<?php
+						echo "<td>" . $row ['username'] . "</td>";
+						echo "<td>" . $row ['password'] . "</td>";
+						echo "<td>" . $row ['email'] . "</td>";
+						echo "<td>" . $row ['firstname'] . "</td>";
+						echo "<td>" . $row ['lastname'] . "</td>";
+						echo "<td>" . $row ['birthdate'] . "</td>";
+						echo "<td>" . $row ['gender'] . "</td></tr>";
+					}
+				}
+				
 				?>
-    
+
+			
+			
+			</table>
+		</div>
+
+
+		<div class = "buttonDiv">
+			<button class="btn btn-primary" name="addMore" id="addMore">Add More</button>
+			&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-primary" name="update" id="update">Update</button>
+			&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-danger" name="delete" id="delete">Delete</button>
+			&nbsp;&nbsp;&nbsp;
+		</div>
+
+	</form>
+
+
+
+
 
 </body>
 </html>

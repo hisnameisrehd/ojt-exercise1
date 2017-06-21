@@ -1,8 +1,8 @@
-<!doctype html>
-<html lang = "en">
+<!DOCTYPE>
+<html>
 <head>
-<meta charset="UTF-8" />
-<title>Create an account</title>
+<meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
+<title>View mo to</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -20,6 +20,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
 </head>
 
 <style>
@@ -36,7 +37,7 @@ body {
 	margin-top: 65px;
 }
 
-#username, #password, #email, #firstname, #lastname, #birthdate {
+#userName, #passWord, #email, #firstname, #lastname, #birthdate {
 	width: 90%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -70,9 +71,18 @@ body {
 	background-color: #efefef;
 }
 
-#submit, #reset{
+#submit1 {
 	padding: 10px 22px;
 }
+
+#cancel {
+	padding: 9px 25px;
+}
+
+#reset {
+	padding: 10px 30px;
+}
+
 #jumboHeader {
 	font-family: Merriweather;
 	font-size: 60px;
@@ -84,7 +94,7 @@ a:hover {
 
 .karmaAkabaneSize {
 	width: 900px;
-	height: 750px;
+	height: 800px;
 }
 
 #firstname, #lastname {
@@ -96,18 +106,56 @@ a:hover {
 	font-size: 20px;
 	font-family: merriweather;
 	color: #efefef;
-
 }
 
 #buttons {
 	text-align: right;
 	margin-right: 55px;
 }
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #efefef;
+	color: black;
+}
+
+tr:nth-child(odd) {
+	color: white;
+}
+
+.buttonDiv {
+	text-align: center;
+}
 </style>
+
 
 <body>
 
-<form action = "CreateUser.php" method = "POST">
+
+	<form action="CreateUser.php" method="POST">
+	<?php
+	$username = "root";
+	$password = "";
+	$servername = "localhost";
+	
+	$conn = new PDO ( "mysql:host=$servername;dbname=ojtexercise", $username, $password );
+	// set the PDO error mode to exception
+	$conn->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+	
+	session_start ();
+	$sql = $_SESSION ['select'];
+	
+	?>
+
 
 		<div class="backgroundColorTransparent marginTop container well">
 			<div class="row">
@@ -118,83 +166,94 @@ a:hover {
 				</div>
 				<div class="col-lg-6" id="textFieldDivider">
 
-					<div class="jumbotron" id="jumboHeader">Fill me out!</div>
+					<div class="jumbotron" id="jumboHeader">Update ME!</div>
+
+<?php
+
+foreach ( $conn->query ( $sql ) as $row ) {
+	?>
 
 					<p>
-						<input type="text" name="username" id="username"
-							required minlength = "3" maxlength = "12" placeholder="Enter your username" />
+						<input type="text" required name="username" id="username"
+							minlength="3" maxlength="12"
+							value="<?php echo $row['username']?>" />
 					</p>
 					<p>
 						<input type="password" required name="password" id="password"
-							placeholder="Enter your password" />
+							placeholder="Your new password" />
 					</p>
 					<p>
 						<input type="email" required name="email" id="email"
-							placeholder="Enter a valid email" />
+							value="<?php echo $row['email']?>" />
 					</p>
 
 					<p>
 						<input type="text" required name="firstname" id="firstname"
-							placeholder="Firstname" /> <input type="text" required
-							name="lastname" id="lastname" placeholder="Lastname" />
+							value="<?php echo $row['firstname']?>" /> <input type="text"
+							required name="lastname" id="lastname"
+							value="<?php echo $row['lastname']?>" />
 					</p>
 					<p>
 						<input type="date" required name="birthdate" id="birthdate"
-							placeholder="Birthdate" />
+							value="<?php echo $row['birthdate']?>" />
 					</p>
 
 					<p id="radioBox">
+					
+					<?php
+	
+	if ($row ['gender'] == "Male") {
+		?>
+						
+						<input class="w3-radio" type="radio" name="gender" id="gender"
+							value="Male" checked />Male &nbsp; &nbsp; &nbsp; &nbsp; <input
+							class="w3-radio" type="radio" name="gender" id="gender"
+							value="Female" />Female
+						
+					<?php
+	} else {
+		?>
+						
 						<input class="w3-radio" type="radio" name="gender" id="gender"
 							value="Male" />Male &nbsp; &nbsp; &nbsp; &nbsp; <input
 							class="w3-radio" type="radio" name="gender" id="gender"
-							value="Female" />Female
-					</p>
-					<br />
-					<br />
+							value="Female" checked />Female
+						
+					<?php
+	}
+	
+	?>
+					
+				<?php } ?>
+				
+				
+				
+				
+				
+					 
+				</p><br/>
 					<p id="buttons">
-						<input class="btn btn-danger" type="reset" name="reset" id="reset" />
-
-
-
-						<input class="btn btn-primary" type="submit" name="submit"
-							id="submit" />
-
-
-
-
-
-
+						<input class="btn btn-primary" type="submit" name="submit1"
+							id="submit1" />
 					</p>
+	
+	</form>
+	<form action="rf_viewusers.php">
 
+		<p id="buttons">
+			<button class="btn btn-danger" name="cancel" id="cancel">Cancel</button>
+		</p>
 
-
-
-
-
-
-				</div>
-			</div>
+		</div>
+		</div>
 
 		</div>
 
 
+
 	</form>
 
-	
-	<?php 
-		
-		
-	
-	
-	
-		
-	
-	
-	?>
-	
-	
-	
-	
+
 
 
 </body>
